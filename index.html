@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudo Credit Union - Online Banking</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal" style="display: flex;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img src="logo.png" alt="Sudo Credit Union" class="modal-logo">
+                <h3>Welcome to Sudo Credit Union</h3>
+                <button class="close-modal" onclick="closeModal('loginModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="username" class="form-control" placeholder="Enter your username" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="password" class="form-control" placeholder="Enter your password" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">
+                            <i class="fas fa-sign-in-alt"></i> Sign In
+                        </button>
+                    </div>
+                    <div class="form-group text-center">
+                        <a href="#" onclick="showForgotPassword()">Forgot Password?</a>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <p>New to Sudo CU? <a href="#" onclick="showRegister()">Enroll Now</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Banking Interface -->
+    <div id="bankingInterface" style="display: none;">
+        <header>
+            <div class="container header-container">
+                <div class="logo">
+                    <img src="logo.png" alt="Sudo Credit Union Logo">
+                    <h1>Sudo <span>Credit Union</span></h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#" onclick="showTab('dashboard')"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="#" onclick="showTab('accounts')"><i class="fas fa-wallet"></i> Accounts</a></li>
+                        <li><a href="#" onclick="showTab('transfer')"><i class="fas fa-exchange-alt"></i> Transfer</a></li>
+                        <li><a href="#" onclick="showTab('zelle')"><i class="fas fa-money-bill-wave"></i> Zelle</a></li>
+                    </ul>
+                </nav>
+                <div class="user-menu">
+                    <div class="user-profile" onclick="showTab('profile')">
+                        <img src="profile.jpg" alt="Profile Photo" class="profile-img">
+                        <span>Jam Cassar</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <button class="btn btn-outline btn-sm" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i> Sign Out
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <div class="sidebar">
+                <div class="sidebar-header">
+                    <img src="profile.jpg" alt="Profile" class="sidebar-profile-img">
+                    <div class="sidebar-user-info">
+                        <h4>Jam Cassar</h4>
+                        <p>Member since 2018</p>
+                    </div>
+                </div>
+                <ul class="sidebar-menu">
+                    <li><a href="#" class="active" onclick="showTab('dashboard')"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="#" onclick="showTab('accounts')"><i class="fas fa-wallet"></i> My Accounts</a></li>
+                    <li><a href="#" onclick="showTab('transfer')"><i class="fas fa-exchange-alt"></i> Transfer Money</a></li>
+                    <li><a href="#" onclick="showTab('zelle')"><i class="fas fa-money-bill-wave"></i> Zelle Payments</a></li>
+                    <li><a href="#" onclick="showTab('deposit')"><i class="fas fa-mobile-alt"></i> Mobile Deposit</a></li>
+                    <li><a href="#" onclick="showTab('history')"><i class="fas fa-history"></i> Transactions</a></li>
+                    <li><a href="#" onclick="showTab('cards')"><i class="fas fa-credit-card"></i> My Cards</a></li>
+                    <li><a href="#" onclick="showTab('profile')"><i class="fas fa-user-cog"></i> Profile</a></li>
+                    <li><a href="#" onclick="showTab('support')"><i class="fas fa-headset"></i> Support</a></li>
+                </ul>
+                <div class="sidebar-footer">
+                    <div class="security-status">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Secure Connection</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-content">
+                <!-- Dashboard Tab -->
+                <div id="dashboard" class="tab-content active">
+                    <div class="welcome-banner">
+                        <div class="welcome-text">
+                            <h2>Welcome back, Jam!</h2>
+                            <p>Your accounts are up to date</p>
+                            <div class="account-summary">
+                                <div class="summary-item">
+                                    <span>Total Balance</span>
+                                    <strong>$58,245.01</strong>
+                                </div>
+                                <div class="summary-item">
+                                    <span>Available Credit</span>
+                                    <strong>$8,765.44</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="quick-actions">
+                            <button class="btn btn-primary" onclick="showTab('transfer')">
+                                <i class="fas fa-exchange-alt"></i> Transfer
+                            </button>
+                            <button class="btn btn-outline" onclick="showTab('deposit')">
+                                <i class="fas fa-mobile-alt"></i> Deposit
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="accounts-section">
+                        <h3>Your Accounts</h3>
+                        <div class="account-cards">
+                            <div class="account-card">
+                                <div class="account-header">
+                                    <span class="account-type">Checking</span>
+                                    <span class="account-number">•••• 6789</span>
+                                </div>
+                                <div class="account-balance">$12,456.78</div>
+                                <div class="account-details">
+                                    <div class="detail-item">
+                                        <span>Available</span>
+                                        <span>$12,456.78</span>
+                                    </div>
+                                </div>
+                                <div class="account-actions">
+                                    <button class="btn btn-secondary btn-sm" onclick="showTab('transfer')">
+                                        <i class="fas fa-exchange-alt"></i> Transfer
+                                    </button>
+                                    <button class="btn btn-secondary btn-sm" onclick="showTab('history')">
+                                        <i class="fas fa-history"></i> History
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="account-card">
+                                <div class="account-header">
+                                    <span class="account-type">Savings</span>
+                                    <span class="account-number">•••• 1234</span>
+                                </div>
+                                <div class="account-balance">$45,789.23</div>
+                                <div class="account-details">
+                                    <div class="detail-item">
+                                        <span>APY</span>
+                                        <span>1.25%</span>
+                                    </div>
+                                </div>
+                                <div class="account-actions">
+                                    <button class="btn btn-secondary btn-sm" onclick="showTab('transfer')">
+                                        <i class="fas fa-exchange-alt"></i> Transfer
+                                    </button>
+                                    <button class="btn btn-secondary btn-sm" onclick="showTab('history')">
+                                        <i class="fas fa-history"></i> History
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="quick-services">
+                        <h3>Quick Actions</h3>
+                        <div class="service-grid">
+                            <div class="service-card" onclick="showTab('transfer')">
+                                <div class="service-icon bg-blue">
+                                    <i class="fas fa-exchange-alt"></i>
+                                </div>
+                                <div class="service-title">Transfer</div>
+                            </div>
+                            <div class="service-card" onclick="showTab('zelle')">
+                                <div class="service-icon bg-purple">
+                                    <i class="fas fa-money-bill-wave"></i>
+                                </div>
+                                <div class="service-title">Zelle</div>
+                            </div>
+                            <div class="service-card" onclick="showTab('deposit')">
+                                <div class="service-icon bg-green">
+                                    <i class="fas fa-mobile-alt"></i>
+                                </div>
+                                <div class="service-title">Deposit</div>
+                            </div>
+                            <div class="service-card" onclick="showTab('cards')">
+                                <div class="service-icon bg-orange">
+                                    <i class="fas fa-credit-card"></i>
+                                </div>
+                                <div class="service-title">Cards</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="recent-transactions">
+                        <div class="section-header">
+                            <h3>Recent Transactions</h3>
+                            <a href="#" onclick="showTab('history')">View All</a>
+                        </div>
+                        <div class="transactions-list">
+                            <div class="transaction-item">
+                                <div class="transaction-icon">
+                                    <i class="fas fa-shopping-bag"></i>
+                                </div>
+                                <div class="transaction-details">
+                                    <div class="transaction-title">Amazon Purchase</div>
+                                    <div class="transaction-date">Today, 2:45 PM</div>
+                                </div>
+                                <div class="transaction-amount debit">-$89.99</div>
+                            </div>
+                            <div class="transaction-item">
+                                <div class="transaction-icon">
+                                    <i class="fas fa-money-bill-wave"></i>
+                                </div>
+                                <div class="transaction-details">
+                                    <div class="transaction-title">Zelle Payment</div>
+                                    <div class="transaction-date">Yesterday, 10:30 AM</div>
+                                </div>
+                                <div class="transaction-amount debit">-$250.00</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accounts Tab -->
+                <div id="accounts" class="tab-content">
+                    <h2>My Accounts</h2>
+                    <div class="account-cards-grid">
+                        <div class="account-card-full">
+                            <div class="account-header">
+                                <div class="account-info">
+                                    <span class="account-type">Checking Account</span>
+                                    <span class="account-number">•••• 6789</span>
+                                </div>
+                                <div class="account-balance">$12,456.78</div>
+                            </div>
+                            <div class="account-details-grid">
+                                <div class="detail-item">
+                                    <span>Available Balance</span>
+                                    <strong>$12,456.78</strong>
+                                </div>
+                                <div class="detail-item">
+                                    <span>Account Number</span>
+                                    <strong>9876543216789</strong>
+                                </div>
+                                <div class="detail-item">
+                                    <span>Routing Number</span>
+                                    <strong>123456789</strong>
+                                </div>
+                                <div class="detail-item">
+                                    <span>Opened Date</span>
+                                    <strong>05/15/2018</strong>
+                                </div>
+                            </div>
+                            <div class="account-actions">
+                                <button class="btn btn-primary">
+                                    <i class="fas fa-exchange-alt"></i> Transfer
+                                </button>
+                                <button class="btn btn-secondary">
+                                    <i class="fas fa-file-pdf"></i> Statements
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Transfer Tab -->
+                <div id="transfer" class="tab-content">
+                    <h2>Transfer Money</h2>
+                    <div class="transfer-container">
+                        <div class="transfer-form">
+                            <form id="transferForm">
+                                <div class="form-group">
+                                    <label for="fromAccount">From Account</label>
+                                    <select id="fromAccount" class="form-control" required>
+                                        <option value="">Select account</option>
+                                        <option value="checking">Checking •••• 6789 ($12,456.78)</option>
+                                        <option value="savings">Savings •••• 1234 ($45,789.23)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="toAccount">To Account</label>
+                                    <select id="toAccount" class="form-control" required>
+                                        <option value="">Select account</option>
+                                        <option value="checking">Checking •••• 6789</option>
+                                        <option value="savings">Savings •••• 1234</option>
+                                        <option value="external">External Account</option>
+                                    </select>
+                                </div>
+                                <div class="form-group" id="externalAccountDetails" style="display: none;">
+                                    <label>External Account Details</label>
+                                    <input type="text" placeholder="Account Number" class="form-control">
+                                    <input type="text" placeholder="Routing Number" class="form-control mt-2">
+                                    <input type="text" placeholder="Bank Name" class="form-control mt-2">
+                                </div>
+                                <div class="form-group">
+                                    <label for="transferAmount">Amount</label>
+                                    <div class="amount-input">
+                                        <span>$</span>
+                                        <input type="number" id="transferAmount" placeholder="0.00" min="0.01" step="0.01" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="transferDate">Transfer Date</label>
+                                    <select id="transferDate" class="form-control">
+                                        <option value="now">Now</option>
+                                        <option value="future">Future Date</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-paper-plane"></i> Send Transfer
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="transfer-info">
+                            <h4>Transfer Information</h4>
+                            <div class="info-box">
+                                <div class="info-item">
+                                    <i class="fas fa-clock"></i>
+                                    <div>
+                                        <strong>Processing Time</strong>
+                                        <p>Immediate for internal transfers</p>
+                                    </div>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-lock"></i>
+                                    <div>
+                                        <strong>Security</strong>
+                                        <p>All transfers are encrypted</p>
+                                    </div>
+                                </div>
+              
